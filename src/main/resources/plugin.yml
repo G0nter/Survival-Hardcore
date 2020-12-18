@@ -1,0 +1,4 @@
+name: SurvivalHC
+main: net.narwell.survivalhc.Survival
+version: ${project.version}
+author: Gonter

@@ -1,0 +1,9 @@
+Configuration:
+  mode: null
+  state: null
+  playing: 0
+  limit: 50
+
+  teleport: true
+
+Location: null

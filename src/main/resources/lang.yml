@@ -1,0 +1,98 @@
+#      ____  ___  _   _ _____ _____ ____
+#    / ___|/ _ \| \ | |_   _| ____|  _ \
+#   | |  _| | | |  \| | | | |  _| | |_) |
+#   | |_| | |_| | |\  | | | | |___|  _ <
+#   \____|\___/|_| \_| |_| |_____|_| \_\
+#              mc.narwell.net
+#
+
+# Mensajes del complemento
+prefix: "&6RC:"
+
+Command:
+  reload: "<prefix> &fEl complemento ha sido recargado."
+  error:
+    permission: "<prefix> &fMm, no tienes permiso para ejecutar eso."
+    console: "<prefix> &fLas consolas no deben hacer eso, eres raro."
+  help: |-
+    &7
+    &f&l           SURVIVAL HARCORE v1.0
+    &7
+    &e/shc start &7- &fInicia el estado de la partida
+    &e/shc setup &7- &fConfigura la arena y el modo
+    &e/shc reload &7- &fRecarga el complemento
+    &7
+
+Game:
+  game_started: "&cLa arena se encuentra en juego."
+  game_full: "&cLa arena esta llena, suerte para la proxima."
+  game_starting: "&cLa arena esta iniciando, llegaste tarde."
+  game_waiting: "&cFalta jugadores para iniciar la partida."
+  game_join: "&c<player> &eha entrado al juego. &b(&e<players>&b/&e<max>&b)"
+  game_leave: "&c<player> &eha salido del juego. &b(&e<players>&b/&e<max>&b)"
+  game_count: "&eEl juego comenzara en &c<sec> segundos."
+
+  player_started: "&eHas iniciado la partida, preparate."
+  player_death: "&cLo siento, has muerto por segunda vez, ¿y aun quieres vivir?"
+  player_command: "&cEstas en juego, no puedes ejecutar eso."
+
+
+  win: |-
+    &a&m&l---------------------------------------------
+    &7
+    &f&l              SURVIVAL HARCORE
+    &7
+    &aGanador &7- <winner>
+    &7
+    &a&l1st Killer &7- <top1> &7- <number1>
+    &6&l2nd Killer &7- <top2> &7- <number2>
+    &c&l3rt Killer &7- <top3> &7- <number3>
+    &7
+    &a&m&l---------------------------------------------
+
+  start: |-
+    &a&m&l---------------------------------------------
+    &7
+    &f&l              SURVIVAL HARCORE
+    &7
+    &e&lRecopila recursos, has equipo y crea tu base
+    &e&lCon el fin de eliminar a cualquier otro jugador.
+    &e&lSobrevive durante 15 días, obtén premios unicos
+    &7
+    &a&m&l---------------------------------------------
+
+  death: |-
+    &a&m&l---------------------------------------------
+    &7
+    &f&l              SURVIVAL HARCORE
+    &7
+    &e&lAcabas de morir, lo siento por ti, pense que
+    &e&ldurarias más tiempo sobreviviendo, que lastima
+    &7
+    &a&m&l---------------------------------------------
+
+Setup:
+  lobby: "<prefix> &fHas establecido el lobby correctamente."
+  no_lobby: "<prefix> &fEl lobby de espera no ha sido establecido, usa /shc setup setlobby"
+
+  mode: "<prefix> &fHas establecido el modo <mode> correctamente"
+  no_mode: "<prefix> &fEl modo de la arena no ha sido configurado, usa /shc setup setmode <Solo, Team>"
+  no_exist_mode: "<prefix> &fOye, ese modo no existe, selecciona los siguientes <SOLO, TEAM>"
+
+  randomtp: "<prefix> &fHas configurado el randomtp de la arena a: <setting>"
+  no_exist_randomtp: "<prefix> &fOye, debes seleccionar una opción valida, usa <true, false>"
+
+  setup_finish: "<prefix> &fLa arena ha sido configurada correctamente, ya pueden jugar n.n"
+  setup_already: "<prefix> &fQue haces, la arena ya esta configurada."
+
+  help: |-
+    &7
+    &f&l           SURVIVAL HARCORE v1.0
+    &7
+    &e/shc setup setlobby &7- &fEstablece el lobby de espera en donde te encuentras
+    &e/shc setup setmode <SOLO, TEAM> &7- &fEstablece el modo del juego
+    &e/shc setup randomtp <true, false> &7 - &fEstablece el randomtp
+    &e/shc setup finish &7- &fGuarda los cambios para activar la arena
+    &7
+
+

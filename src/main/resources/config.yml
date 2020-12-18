@@ -1,0 +1,51 @@
+#      ____  ___  _   _ _____ _____ ____
+#    / ___|/ _ \| \ | |_   _| ____|  _ \
+#   | |  _| | | |  \| | | | |  _| | |_) |
+#   | |_| | |_| | |\  | | | | |___|  _ <
+#   \____|\___/|_| \_| |_| |_____|_| \_\
+#              mc.narwell.net
+#
+
+# Configuración de la base de datos
+
+# Tipos de almacenamiento (SQL y MySQL)
+Storage: MySQL
+
+# Datos y configuración para la conexion a la database
+data:
+  address: 127.0.0.1
+  database: minecraft
+  username: root
+  password: 'passwordXd'
+  port: 3306
+
+  pool-settings:
+    maximum-pool-size: 10
+    minimum-idle: 10
+    connection-timeout: 5000 # 5 seconds
+
+Options:
+
+  # Lista de comandos que permitiras, o bloquearas
+  command:
+    invert: false
+    whitelist:
+      - lobby
+      - hub
+
+  # Permite que los jugadores tengan un tag
+  nametag:
+    lobby: true
+    in_game: true
+
+  # Activa o desactiva el scoreboard del juego
+  scoreboard:
+    lobby: true
+    in_game: true
+
+  arena:
+    start: 15
+    world: Lobby
+
+  sounds:
+    starting: NOTE_PLING
