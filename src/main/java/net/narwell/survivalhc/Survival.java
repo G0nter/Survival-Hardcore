@@ -1,11 +1,11 @@
 /*
  * Survival
  *
- * Class ver
+ * 1.0-SNAPSHOT
  *
  * 17/12/2020
  *
- * Copyright
+ * Copyright All rights reserved
  */
 
 package net.narwell.survivalhc;
@@ -31,14 +31,18 @@ public class Survival extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        database.closePool();
+        database.close();
     }
 
     private void loadDatabase() {
-        if (getConfig().getString("Storage").equalsIgnoreCase("MySQL")) {
-            database = new MySQLDatabase(this);
-        } else {
-            database = new SQLiteDatabase();
+
+        switch (getConfig().getString("Storage")) {
+            case "MySQL":
+                database = new MySQLDatabase(this);
+                break;
+            case "SQLite":
+                database = new SQLiteDatabase(this);
+                break;
         }
     }
 

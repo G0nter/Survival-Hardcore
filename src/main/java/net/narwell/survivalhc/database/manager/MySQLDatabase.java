@@ -17,12 +17,12 @@ public class MySQLDatabase implements Database {
 
     public MySQLDatabase(final Survival main) {
         this.main = main;
-        open();
+        init(main);
         makeTable();
     }
 
     @Override
-    public void open() {
+    public void init(Survival main) {
         HikariConfig hikari = new HikariConfig();
 
         hikari.setJdbcUrl("jdbc:mysql://" + main.getConfig().getString("data.address") + ":" + main.getConfig().getString("data.port") + "/" + main.getConfig().getString("data.database"));
@@ -37,7 +37,13 @@ public class MySQLDatabase implements Database {
     }
 
     @Override
-    public void makeTable() {
+    public void close() {
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
+        }
+    }
+
+    private void makeTable() {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -53,23 +59,9 @@ public class MySQLDatabase implements Database {
         }
     }
 
-    @Override
-    public void close(Connection conn, PreparedStatement ps, ResultSet res) {
+    private void close(Connection conn, PreparedStatement ps, ResultSet res) {
         if (conn != null) try { conn.close(); } catch (SQLException ignored) {}
         if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
         if (res != null) try { res.close(); } catch (SQLException ignored) {}
     }
-
-    @Override
-    public void closePool() {
-        if (dataSource != null && !dataSource.isClosed()) {
-            dataSource.close();
-        }
-    }
-
-    @Override
-    public Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
-    }
-
 }
