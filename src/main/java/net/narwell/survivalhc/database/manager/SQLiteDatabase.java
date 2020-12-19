@@ -46,7 +46,7 @@ public class SQLiteDatabase implements SQLDatabase {
         PreparedStatement ps = null;
 
         try {
-            ps = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `SurvivalHC_players` (`UUID` VARCHAR(36), `Username` VARCHAR(16), `WasTeleported` VARCHAR(16), `Kills` INT, `Deaths` INT, `Time` INT)");
+            ps = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `SurvivalHC_players` (`UUID` VARCHAR(36), `WasTeleported` VARCHAR(16), `Kills` INT, `Deaths` INT, `Time` INT)");
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -65,7 +65,8 @@ public class SQLiteDatabase implements SQLDatabase {
         }
     }
 
-    public Connection getConnection() {
+    @Override
+    public Connection getConnection() throws SQLException {
         return connection;
     }
 }

@@ -43,7 +43,7 @@ public class MySQLDatabase implements SQLDatabase {
 
         try {
             conn = dataSource.getConnection();
-            ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS `SurvivalHC_players` (`UUID` VARCHAR(36), `Username` VARCHAR(16), `WasTeleported` VARCHAR(16), `Kills` INT, `Deaths` INT, `Time` INT)");
+            ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS `SurvivalHC_players` (`UUID` VARCHAR(36), `WasTeleported` VARCHAR(16), `Kills` INT, `Deaths` INT, `Time` INT)");
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -77,7 +77,8 @@ public class MySQLDatabase implements SQLDatabase {
             } catch (SQLException ignored) {}
     }
 
-    public HikariDataSource getConnection() {
-        return dataSource;
+    @Override
+    public Connection getConnection() throws SQLException {
+        return dataSource.getConnection();
     }
 }
