@@ -12,4 +12,8 @@ public class GamePlayer {
     private int time;
     private Collection<PotionEffect> effects;
 
+    public GamePlayer() {
+
+    }
+
 }

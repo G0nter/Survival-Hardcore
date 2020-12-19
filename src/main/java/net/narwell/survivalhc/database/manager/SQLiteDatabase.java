@@ -1,21 +1,23 @@
 package net.narwell.survivalhc.database.manager;
 
 import net.narwell.survivalhc.Survival;
-import net.narwell.survivalhc.database.Database;
+import net.narwell.survivalhc.database.SQLDatabase;
 
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 
-public class SQLiteDatabase implements Database {
+public class SQLiteDatabase implements SQLDatabase {
 
     private Connection connection;
 
     public SQLiteDatabase(final Survival main) {
         init(main);
+        create();
     }
 
     @Override
@@ -40,6 +42,19 @@ public class SQLiteDatabase implements Database {
     }
 
     @Override
+    public void create() {
+        PreparedStatement ps = null;
+
+        try {
+            ps = connection.prepareStatement("CREATE TABLE IF NOT EXISTS `SurvivalHC_players` (`UUID` VARCHAR(36), `Username` VARCHAR(16), `WasTeleported` VARCHAR(16), `Kills` INT, `Deaths` INT, `Time` INT)");
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void close() {
         if (this.connection != null) {
             try {
@@ -48,5 +63,9 @@ public class SQLiteDatabase implements Database {
                 e.printStackTrace();
             }
         }
+    }
+
+    public Connection getConnection() {
+        return connection;
     }
 }

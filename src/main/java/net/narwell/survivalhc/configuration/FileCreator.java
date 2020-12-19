@@ -1,3 +1,13 @@
+/*
+ * FileCreator
+ *
+ * 1.0-SNAPSHOT
+ *
+ * 17/12/2020
+ *
+ * Copyright All rights reserved
+ */
+
 package net.narwell.survivalhc.configuration;
 
 import net.narwell.survivalhc.utils.Colorize;
@@ -8,6 +18,8 @@ import org.bukkit.plugin.Plugin;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
+
+
 
 public class FileCreator extends YamlConfiguration{
 

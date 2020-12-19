@@ -3,22 +3,21 @@ package net.narwell.survivalhc.database.manager;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import net.narwell.survivalhc.Survival;
-import net.narwell.survivalhc.database.Database;
+import net.narwell.survivalhc.database.SQLDatabase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
 
-public class MySQLDatabase implements Database {
+public class MySQLDatabase implements SQLDatabase {
 
-    private final Survival main;
     private HikariDataSource dataSource;
 
     public MySQLDatabase(final Survival main) {
-        this.main = main;
         init(main);
-        makeTable();
+        create();
     }
 
     @Override
@@ -34,16 +33,11 @@ public class MySQLDatabase implements Database {
         hikari.setConnectionTimeout(main.getConfig().getInt("data.pool-settings.connection-timeout"));
         //hikari.setConnectionTestQuery(testQuery);
         dataSource = new HikariDataSource(hikari);
+        main.getLogger().log(Level.INFO, "Plugin conectado a MySQL");
     }
 
     @Override
-    public void close() {
-        if (dataSource != null && !dataSource.isClosed()) {
-            dataSource.close();
-        }
-    }
-
-    private void makeTable() {
+    public void create() {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -59,9 +53,31 @@ public class MySQLDatabase implements Database {
         }
     }
 
+    @Override
+    public void close() {
+        if (dataSource != null && !dataSource.isClosed()) {
+            dataSource.close();
+        }
+    }
+
     private void close(Connection conn, PreparedStatement ps, ResultSet res) {
-        if (conn != null) try { conn.close(); } catch (SQLException ignored) {}
-        if (ps != null) try { ps.close(); } catch (SQLException ignored) {}
-        if (res != null) try { res.close(); } catch (SQLException ignored) {}
+        if (conn != null)
+            try {
+                conn.close();
+            } catch (SQLException ignored) {}
+
+        if (ps != null)
+            try {
+                ps.close();
+            } catch (SQLException ignored) {}
+
+        if (res != null)
+            try {
+                res.close();
+            } catch (SQLException ignored) {}
+    }
+
+    public HikariDataSource getConnection() {
+        return dataSource;
     }
 }
