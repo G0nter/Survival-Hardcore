@@ -1,13 +1,3 @@
-/*
- * FileCreator
- *
- * 1.0-SNAPSHOT
- *
- * 17/12/2020
- *
- * Copyright All rights reserved
- */
-
 package net.narwell.survivalhc.configuration;
 
 import net.narwell.survivalhc.utils.Colorize;
