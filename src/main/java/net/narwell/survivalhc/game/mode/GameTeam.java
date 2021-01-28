@@ -1,5 +1,7 @@
-package net.narwell.survivalhc.game.manager;
+package net.narwell.survivalhc.game.mode;
 
+import net.narwell.survivalhc.Survival;
+import net.narwell.survivalhc.configuration.FileCreator;
 import net.narwell.survivalhc.game.Game;
 import net.narwell.survivalhc.game.player.GamePlayer;
 
@@ -7,7 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class GameSolo implements Game {
+public class GameTeam implements Game {
+
+    private final Survival main;
 
     private String gameState;
     private int gameLimit;
@@ -15,10 +19,18 @@ public class GameSolo implements Game {
 
     private Map<UUID, GamePlayer> playersInGame = new HashMap<>();
 
-    public GameSolo() {
+    public GameTeam(final Survival main, final FileCreator arena) {
+        this.main = main;
+        gameState = arena.getString("Configuration.state");
+        gameLimit = arena.getInt("Configuration.limit");
+        playersPlaying = arena.getInt("Configuration.playing");
 
     }
 
+    @Override
+    public void setPlayerGame(UUID uuid) {
+        playersInGame.put(uuid, new GamePlayer(main, uuid));
+    }
 
     @Override
     public void setGameState(String gameState) {
@@ -33,6 +45,16 @@ public class GameSolo implements Game {
     @Override
     public void setPlayersPlaying(int playersPlaying) {
         this.playersPlaying = playersPlaying;
+    }
+
+    @Override
+    public GamePlayer getGamePlayer(UUID uuid) {
+        return playersInGame.get(uuid);
+    }
+
+    @Override
+    public Map<UUID, GamePlayer> getPlayersInGame() {
+        return playersInGame;
     }
 
     @Override

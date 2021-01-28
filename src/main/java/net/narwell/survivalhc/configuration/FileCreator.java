@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 
-
-public class FileCreator extends YamlConfiguration{
+public class FileCreator extends YamlConfiguration {
 
     private final String fileName;
     private final File file;
@@ -48,9 +47,14 @@ public class FileCreator extends YamlConfiguration{
         }
     }
 
+    public boolean existFile() {
+        if (file.exists()) return true;
+
+        return false;
+    }
+
     public String get(String string) {
         if (super.getString(string) == null) return "path no found: " + string;
-
         return Colorize.set(super.getString(string).replace("<prefix>", super.getString("prefix")));
     }
 

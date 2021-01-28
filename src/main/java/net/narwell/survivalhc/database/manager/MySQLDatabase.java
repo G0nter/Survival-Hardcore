@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import net.narwell.survivalhc.Survival;
 import net.narwell.survivalhc.database.SQLDatabase;
+import org.bukkit.Bukkit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +23,14 @@ public class MySQLDatabase implements SQLDatabase {
 
     @Override
     public void init(Survival main) {
+
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return;
+        }
+
         HikariConfig hikari = new HikariConfig();
 
         hikari.setJdbcUrl("jdbc:mysql://" + main.getConfig().getString("data.address") + ":" + main.getConfig().getString("data.port") + "/" + main.getConfig().getString("data.database"));
@@ -32,8 +41,15 @@ public class MySQLDatabase implements SQLDatabase {
         hikari.setMaximumPoolSize(main.getConfig().getInt("data.pool-settings.maximum-pool-size"));
         hikari.setConnectionTimeout(main.getConfig().getInt("data.pool-settings.connection-timeout"));
         //hikari.setConnectionTestQuery(testQuery);
-        dataSource = new HikariDataSource(hikari);
-        main.getLogger().log(Level.INFO, "Plugin conectado a MySQL");
+
+        try {
+            dataSource = new HikariDataSource(hikari);
+            main.getLogger().log(Level.INFO, "Plugin connected to MySQL");
+        }catch (Exception e) {
+            main.getLogger().log(Level.WARNING, "A problem has occurred with the plugin, I have been deactivated");
+            Bukkit.getPluginManager().disablePlugin(main);
+        }
+
     }
 
     @Override
@@ -46,15 +62,15 @@ public class MySQLDatabase implements SQLDatabase {
             ps = conn.prepareStatement("CREATE TABLE IF NOT EXISTS `SurvivalHC_players` (`UUID` VARCHAR(36), `WasTeleported` VARCHAR(16), `Kills` INT, `Deaths` INT, `Time` INT)");
 
             ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException exeption) {
+            exeption.printStackTrace();
         } finally {
             close(conn, ps, null);
         }
     }
 
     @Override
-    public void close() {
+    public void close() throws SQLException {
         if (dataSource != null && !dataSource.isClosed()) {
             dataSource.close();
         }

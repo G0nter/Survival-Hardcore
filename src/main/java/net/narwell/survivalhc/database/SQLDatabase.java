@@ -8,8 +8,11 @@ import java.sql.SQLException;
 public interface SQLDatabase {
 
     void init(Survival main);
+
     void create();
-    void close();
+
+    void close() throws SQLException;
+
     Connection getConnection() throws SQLException;
 
 }

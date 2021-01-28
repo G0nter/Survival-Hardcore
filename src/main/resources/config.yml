@@ -8,8 +8,8 @@
 
 # Configuración de la base de datos
 
-# Tipos de almacenamiento (SQL y MySQL)
-Storage: MySQL
+# Tipos de almacenamiento (SQLite y MySQL)
+Storage: SQLite
 
 # Datos y configuración para la conexion a la database
 data:
@@ -22,7 +22,7 @@ data:
   pool-settings:
     maximum-pool-size: 10
     minimum-idle: 10
-    connection-timeout: 5000 # 5 seconds
+    connection-timeout: 5000 # 5 segundos
 
 Options:
 

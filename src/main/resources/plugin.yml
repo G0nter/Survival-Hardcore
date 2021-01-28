@@ -2,3 +2,9 @@ name: SurvivalHC
 main: net.narwell.survivalhc.Survival
 version: 1.0-SNAPSHOT
 author: Gonter
+softdepend: [LibsDisguises, ProtocolLib, PlaceholderAPI]
+api-version: 1.13
+commands:
+  survival:
+    description: Comando simple
+    aliases: ["survivalhd", "shc"]

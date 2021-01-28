@@ -30,11 +30,11 @@ public class SQLiteDatabase implements SQLDatabase {
                 main.getLogger().log(Level.INFO, dataFile.toString());
             }
 
-            if (connection != null && !connection.isClosed()) {
+            //if (!(connection != null && !connection.isClosed()) {
                 Class.forName("org.sqlite.JDBC");
                 connection = DriverManager.getConnection("jdbc:sqlite:" + dataFile);
-                main.getLogger().log(Level.INFO, "Plugin conectado a SQLite");
-            }
+                main.getLogger().log(Level.INFO, "Plugin connected to SQLite");
+            //}
 
         } catch (ClassNotFoundException | SQLException | IOException e) {
             e.printStackTrace();
@@ -55,13 +55,9 @@ public class SQLiteDatabase implements SQLDatabase {
     }
 
     @Override
-    public void close() {
+    public void close() throws SQLException {
         if (this.connection != null) {
-            try {
-                this.connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            this.connection.close();
         }
     }
 

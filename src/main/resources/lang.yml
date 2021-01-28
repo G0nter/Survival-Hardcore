@@ -71,6 +71,9 @@ Game:
     &7
     &a&m&l---------------------------------------------
 
+
+
+
 Setup:
   lobby: "<prefix> &fHas establecido el lobby correctamente."
   no_lobby: "<prefix> &fEl lobby de espera no ha sido establecido, usa /shc setup setlobby"
